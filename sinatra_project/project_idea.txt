@@ -1,0 +1,45 @@
+Users sign up/sign into app to create their own D&D character sheets (simplified)
+
+
+
+Interface:
+    -User can view their Character Sheets 
+    - User can submit thier Character Sheet
+    - User can edit characters
+    - User can Delete (kill) characters
+
+
+User Routes & views 
+    - 'users/signup' => render signup 
+    - 'users/sigup' => process signup form, create user, POST method
+    - 'user/signin' => render sign in 
+    - 'user/signin' => process signin form, authentication
+    - set sessions 
+    - user can view their sheets '/users/:id/characters
+
+
+User class 
+    - attribute => name, password
+    - user signs up/logs in
+    - has many characters 
+
+Character class 
+    - attribute => name, class, race, level, strength, dexterity, constitution, intelligence, wisdom, charisma
+    - characters belong to user
+
+
+Character controllers and views
+    - '/characters/new' => renders character sheet 
+    - '/characters' => process character POST 
+    - '/characters' => show all characters
+    - '/characters/:id' => renders all characters created by user based on id 
+    - '/characters/:id/edit' => renders update form for instance or characters
+    - '/characters/:id' => updates 
+    - '/characters/:id/kill' => Kills character
+
+
+
+
+
+
+
