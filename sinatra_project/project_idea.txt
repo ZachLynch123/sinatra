@@ -10,10 +10,10 @@ Interface:
 
 
 User Routes & views 
-    - 'users/signup' => render signup 
-    - 'users/sigup' => process signup form, create user, POST method
-    - 'user/signin' => render sign in 
-    - 'user/signin' => process signin form, authentication
+    - '/signup' => render signup 
+    - '/sigup' => process signup form, create user, POST method
+    - /signin' => render sign in 
+    - /signin' => process signin form, authentication
     - set sessions 
     - user can view their sheets '/users/:id/characters
 
