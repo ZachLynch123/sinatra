@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     @user = User.create(:username => params[:username], :password => params[:password])
     @session = session
     binding.pry
-    if user.save 
+    if @user.save 
       redirect '/login'
     else
       "Invalid username or password"
@@ -36,13 +36,19 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do 
-    user = User.find_by(:username => params[:username])
-
-    if user
-      redirect '/characters/'
+    @user = User.find_by(:username => params[:username])
+    if @user
+      redirect "/users/#{@user.id}"
     else
       redirect '/login'
     end
+  end
+
+
+  get '/users/:id' do 
+    @user = User.find(params[:id])
+    
+    erb :'/users/show'
   end
 
 
