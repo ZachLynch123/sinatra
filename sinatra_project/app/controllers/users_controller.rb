@@ -3,7 +3,7 @@ class UsersController < Sinatra::Base
     configure do
         set :public_folder, 'public'
         set :views, 'app/views'
-        enable :sessions 
+        enable :sessions
         set :session_secret, "secret_session"
       end
 
@@ -11,11 +11,17 @@ class UsersController < Sinatra::Base
 
     get '/users/:id' do 
         @user = User.find(params[:id])
+        session[:user] = @user
+        @session = session
         erb :'/users/show'
       end
 
+    post '/characters' do       
+      redirect '/characters/new'
+    end
 
-      
+
+
 
 
 

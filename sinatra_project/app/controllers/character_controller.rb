@@ -10,12 +10,12 @@ class CharacterController < Sinatra::Base
       end
 
       get '/characters/new' do 
-
         erb :'characters/new'
       end
 
 
       post '/characters/new' do 
+
         @character = Character.create(
           :name => params[:name],
           :character_class => params[:class],
@@ -27,7 +27,10 @@ class CharacterController < Sinatra::Base
           :wisdom => params[:wisdom],
           :charisma => params[:charisma]
         )
-    
+        @character.user_id = session[:user][:id]
+        @character.save
+
+        redirect "users/#{session[:user][:id]}"
       end
 
 
