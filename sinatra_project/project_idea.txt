@@ -10,27 +10,27 @@ Interface:
 
 
 User Routes & views 
-    - '/signup' => render signup 
-    - '/sigup' => process signup form, create user, POST method
-    - /signin' => render sign in 
-    - /signin' => process signin form, authentication
+    x '/signup' => render signup 
+    x '/sigup' => process signup form, create user, POST method
+    x /signin' => render sign in 
+    x /signin' => process signin form, authentication
     - set sessions 
     - user can view their sheets '/users/:id/characters
 
 
 User class 
-    - attribute => name, password
-    - user signs up/logs in
-    - has many characters 
+    x attribute => name, password
+    x user signs up/logs in
+    ? has many characters 
 
 Character class 
-    - attribute => name, class, race, level, strength, dexterity, constitution, intelligence, wisdom, charisma
-    - characters belong to user
+    x attribute => name, class, race, level, strength, dexterity, constitution, intelligence, wisdom, charisma
+    ? characters belong to user
 
 
 Character controllers and views
-    - '/characters/new' => renders character sheet 
-    - '/characters' => process character POST 
+    x '/characters/new' => renders character sheet 
+    x '/characters/new' => process character POST 
     - '/characters' => show all characters
     - '/characters/:id' => renders all characters created by user based on id 
     - '/characters/:id/edit' => renders update form for instance or characters

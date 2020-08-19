@@ -47,33 +47,7 @@ class ApplicationController < Sinatra::Base
       redirect '/login'
     end
   end
-  
 
-
-  post '/characters/new' do 
-    @user = User.find_by
-  end
-
-  post '/characters' do 
-    binding.pry
-    @character_created = Character.create(
-      :name => params[:name],
-      :class => params[:class],
-      :race => params[:race],
-      :strength => params[:strength],
-      :dexterity => params[:dexterity],
-      :constitution => params[:constitution],
-      :intelligence => params[:intelligence],
-      :wisdom => params[:wisdom],
-      :charisma => params[:charisma]
-    )
-
-    @character_created.user = @user
-    @character_created.save 
-
-    @character_created
-
-  end
 
 
 
