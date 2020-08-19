@@ -14,18 +14,18 @@ User Routes & views
     x '/sigup' => process signup form, create user, POST method
     x /signin' => render sign in 
     x /signin' => process signin form, authentication
-    - set sessions 
+    x set sessions 
     - user can view their sheets '/users/:id/characters
 
 
 User class 
     x attribute => name, password
     x user signs up/logs in
-    ? has many characters 
+    x has many characters 
 
 Character class 
     x attribute => name, class, race, level, strength, dexterity, constitution, intelligence, wisdom, charisma
-    ? characters belong to user
+    x characters belong to user
 
 
 Character controllers and views
@@ -39,7 +39,11 @@ Character controllers and views
 
 
 
-
+What to do next?
+    -Display all character names in a list on users/:id 
+    -Update character sheets 
+    -Kill characters 
+    -
 
 
 
