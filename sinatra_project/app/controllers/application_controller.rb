@@ -20,7 +20,6 @@ class ApplicationController < Sinatra::Base
   post "/sign_up" do 
     @user = User.create(:username => params[:username], :password => params[:password])
     @session = session
-    binding.pry
     if @user.save 
       redirect '/login'
     else
@@ -35,21 +34,49 @@ class ApplicationController < Sinatra::Base
     erb :login 
   end
 
+  #separate the application controller into 2 different controllers, one for users, one for character
+
   post '/login' do 
     @user = User.find_by(:username => params[:username])
     if @user
+      session["user"] = @user
+      session["user_id"] = @user.id
+      @session = session
       redirect "/users/#{@user.id}"
     else
       redirect '/login'
     end
   end
+  
 
 
-  get '/users/:id' do 
-    @user = User.find(params[:id])
-    
-    erb :'/users/show'
+  post '/characters/new' do 
+    @user = User.find_by
   end
+
+  post '/characters' do 
+    binding.pry
+    @character_created = Character.create(
+      :name => params[:name],
+      :class => params[:class],
+      :race => params[:race],
+      :strength => params[:strength],
+      :dexterity => params[:dexterity],
+      :constitution => params[:constitution],
+      :intelligence => params[:intelligence],
+      :wisdom => params[:wisdom],
+      :charisma => params[:charisma]
+    )
+
+    @character_created.user = @user
+    @character_created.save 
+
+    @character_created
+
+  end
+
+
+
 
 
 end
