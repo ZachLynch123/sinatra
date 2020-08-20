@@ -11,11 +11,13 @@ class UsersController < Sinatra::Base
 
     get '/users/:id' do 
         @user = User.find(params[:id])
+        @characters = Character.where("user_id = ?", params[:id])
         session[:user] = @user
         @session = session
         erb :'/users/show'
       end
 
+    #Create 
     post '/characters' do       
       redirect '/characters/new'
     end

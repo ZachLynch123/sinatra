@@ -43,7 +43,7 @@ What to do next?
     -Display all character names in a list on users/:id 
     -Update character sheets 
     -Kill characters 
-    -
+    -Logout button
 
 
 

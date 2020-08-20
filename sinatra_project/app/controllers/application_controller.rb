@@ -34,8 +34,6 @@ class ApplicationController < Sinatra::Base
     erb :login 
   end
 
-  #separate the application controller into 2 different controllers, one for users, one for character
-
   post '/login' do 
     @user = User.find_by(:username => params[:username])
     if @user
