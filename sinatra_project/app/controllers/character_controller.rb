@@ -9,6 +9,10 @@ class CharacterController < Sinatra::Base
         set :session_secret, "secret_session"
       end
 
+      post '/characters/' do       
+        redirect '/characters/new'
+      end
+
       get '/characters/new' do 
         erb :'characters/new'
       end

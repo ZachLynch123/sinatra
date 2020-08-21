@@ -18,12 +18,22 @@ class UsersController < Sinatra::Base
       end
 
     #Create 
-    post '/characters' do       
-      redirect '/characters/new'
-    end
+  
 
     #TODO: Create list of characters, with buttons to edit and delete
     
+    #Update
+
+
+
+
+
+
+
+    #Delete
+
+
+
 
 
 

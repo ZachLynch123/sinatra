@@ -1,4 +1,15 @@
 <h1>Hello, <%=@user.username%></h1>
 <%# Create a form object that's going to display all characters associated with this user in a list, and put buttons next to them using a formaction="" attribute for edit and kill %>
-<form action="/characters"><input type="submit" value="create character"></form>
+<% @characters.each do |character|%>
+    <form action="/characters/<%=character.id%>" method="POST">
+    
+        name: <%= character.name %><br>
+        class: <%= character.character_class %><br>
+        race: <%= character.race %><br>
+        <input type="submit" value="Edit">
+        <input type="submit" formaction="/characters/<%=character.id%>" value="kill"><br>
+        <%end%>
+</form>
+
+<form action="/characters/new"><input type="submit" value="create character"></form>
 <%# Add a logut button on screen as well %>
