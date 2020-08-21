@@ -17,7 +17,7 @@ class CharacterController < Sinatra::Base
         erb :'characters/new'
       end
 
-
+      # Create
       post '/characters/new' do 
 
         @character = Character.create(
@@ -37,6 +37,7 @@ class CharacterController < Sinatra::Base
         redirect "users/#{session[:user][:id]}"
       end
 
+      # Update
       get '/characters/:id/edit' do
         @character = Character.find(params[:id])
         erb :'characters/edit'
@@ -65,7 +66,14 @@ class CharacterController < Sinatra::Base
       end
 
 
+      # Delete
 
+      delete '/characters/:id' do 
+        @character = Character.find(params[:id])
+        @character.delete 
+        redirect :"/users/#{session[:user][:id]}"
+
+      end
 
 
 end

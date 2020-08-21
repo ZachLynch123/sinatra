@@ -17,21 +17,6 @@ class UsersController < Sinatra::Base
         erb :'/users/show'
       end
 
-    #Create 
-  
-
-    #TODO: Create list of characters, with buttons to edit and delete
-    
-    #Update
-
-
-
-
-
-
-
-    #Delete
-
 
 
 
