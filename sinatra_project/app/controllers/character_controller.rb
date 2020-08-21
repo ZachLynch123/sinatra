@@ -37,5 +37,35 @@ class CharacterController < Sinatra::Base
         redirect "users/#{session[:user][:id]}"
       end
 
+      get '/characters/:id/edit' do
+        @character = Character.find(params[:id])
+        erb :'characters/edit'
+      end
+
+
+      post '/characters/:id/edit' do 
+        redirect :"/characters/#{params[:id]}/edit"
+      end
+
+      post '/characters/:id' do 
+        
+        @character = Character.find(params[:id])
+        @character.update(
+          :name => params[:name],
+          :character_class => params[:class],
+          :race => params[:race],
+          :strength => params[:strength],
+          :dexterity => params[:dexterity],
+          :constitution => params[:constitution],
+          :intelligence => params[:intelligence],
+          :wisdom => params[:wisdom],
+          :charisma => params[:charisma]
+        )
+          redirect :"/users/#{session[:user][:id]}"
+      end
+
+
+
+
 
 end

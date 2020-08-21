@@ -1,0 +1,14 @@
+<h1>Edit character</h1>
+<form action="/characters/<%=@character.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label>Name</label><input type="text" value="<%=@character.name%>" name="name">
+    <label>Class</label><input type="text" value="<%=@character.character_class%>" name="class">
+    <label>Race</label><input type="text" value="<%=@character.race%>" name="race">
+    <label>Strength</label><input type="text" value="<%=@character.strength%>" name="strength">
+    <label>Dexterity</label><input type="text" value="<%=@character.dexterity%>" name="dexterity">
+    <label>Constitution</label><input type="text" value="<%=@character.constitution%>" name="constitution">
+    <label>Intelligence</label><input type="text" value="<%=@character.intelligence%>" name="intelligence">
+    <label>Wisdom</label><input type="text" value="<%=@character.wisdom%>" name="wisdom">
+    <label>Charisma</label><input type="text" value="<%=@character.charisma%>" name="charisma">
+    <input type="submit" value="Edit Character">
+</form>
