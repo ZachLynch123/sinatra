@@ -69,10 +69,8 @@ class CharacterController < Sinatra::Base
       # Delete
 
       delete '/characters/:id' do 
-        @character = Character.find(params[:id])
-        @character.delete 
+        Character.where(id: params[:id]).destroy_all
         redirect :"/users/#{session[:user][:id]}"
-
       end
 
 
