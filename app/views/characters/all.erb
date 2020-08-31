@@ -1,3 +1,3 @@
 <%@characters.each do |character|%>
-    <p><%=character.name%></p>
+    <a href=<%="/characters/#{character.id}/details"%>><%=character.name%></a>
 <%end%>

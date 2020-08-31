@@ -43,8 +43,15 @@ class CharacterController < Sinatra::Base
 
       get '/characters/:id/all' do 
         @characters = Character.where("user_id = ?", params[:id])
+        
         erb :'characters/all'
       end
+
+      get '/characters/:id/details' do 
+        @character = Character.where("id = ?", params[:id])
+        erb :'characters/details'
+      end
+
 
       # Update
       get '/characters/:id/edit' do

@@ -3,6 +3,7 @@
 <% @characters.each do |character|%>
     <form method="POST" action="/characters/<%=character.id%>">
         <input type="hidden" value="delete" name="_method">
+        <%=character.id%>
         name: <%= character.name %><br>
         class: <%= character.character_class %><br>
         race: <%= character.race %><br>
