@@ -32,9 +32,18 @@ class CharacterController < Sinatra::Base
           :charisma => params[:charisma]
         )
         @character.user_id = session[:user][:id]
-        @character.save
+        if @character.save
+          redirect "users/#{session[:user][:id]}"
+        else 
+          redirect '/characters/new'
+        end
+      end
 
-        redirect "users/#{session[:user][:id]}"
+      # Read 
+
+      get '/characters/:id/all' do 
+        @characters = Character.where("user_id = ?", params[:id])
+        erb :'characters/all'
       end
 
       # Update
@@ -48,7 +57,8 @@ class CharacterController < Sinatra::Base
         redirect :"/characters/#{params[:id]}/edit"
       end
 
-      post '/characters/:id' do 
+      patch '/characters/:id' do 
+        # add logic to make sure that the character belongs to the current user
         
         @character = Character.find(params[:id])
         @character.update(
@@ -69,9 +79,16 @@ class CharacterController < Sinatra::Base
       # Delete
 
       delete '/characters/:id' do 
-        Character.where(id: params[:id]).destroy_all
+        # add logic to make sure that the character belongs to the current user
+        @character = Character.find_by(:id => params[:id])
+        binding.pry
+        @character.delete
         redirect :"/users/#{session[:user][:id]}"
       end
 
+      # Add A read, make it so you can view all the characters
+      # and see all the details for a single character related to the user
+
+      # limit crud functionality for each user 
 
 end
