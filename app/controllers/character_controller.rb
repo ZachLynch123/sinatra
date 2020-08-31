@@ -9,9 +9,7 @@ class CharacterController < Sinatra::Base
         set :session_secret, "secret_session"
       end
 
-      post '/characters/' do       
-        redirect '/characters/new'
-      end
+     
 
       get '/characters/new' do 
         erb :'characters/new'
@@ -68,18 +66,20 @@ class CharacterController < Sinatra::Base
         # add logic to make sure that the character belongs to the current user
         
         @character = Character.find(params[:id])
-        @character.update(
-          :name => params[:name],
-          :character_class => params[:class],
-          :race => params[:race],
-          :strength => params[:strength],
-          :dexterity => params[:dexterity],
-          :constitution => params[:constitution],
-          :intelligence => params[:intelligence],
-          :wisdom => params[:wisdom],
-          :charisma => params[:charisma]
-        )
-          redirect :"/users/#{session[:user][:id]}"
+        if @character.user_id == session[:user][:id]
+          @character.update(
+            :name => params[:name],
+            :character_class => params[:class],
+            :race => params[:race],
+            :strength => params[:strength],
+            :dexterity => params[:dexterity],
+            :constitution => params[:constitution],
+            :intelligence => params[:intelligence],
+            :wisdom => params[:wisdom],
+            :charisma => params[:charisma]
+          )
+            redirect :"/users/#{session[:user][:id]}"
+        end
       end
 
 
@@ -88,9 +88,10 @@ class CharacterController < Sinatra::Base
       delete '/characters/:id' do 
         # add logic to make sure that the character belongs to the current user
         @character = Character.find_by(:id => params[:id])
-        binding.pry
-        @character.delete
-        redirect :"/users/#{session[:user][:id]}"
+        if @character.user_id == session[:user][:id]
+          @character.delete
+          redirect :"/users/#{session[:user][:id]}"
+        end
       end
 
       # Add A read, make it so you can view all the characters
