@@ -2,23 +2,24 @@ require './config/environment'
 
 class CharacterController < ApplicationController 
 
-    configure do
-        set :public_folder, 'public'
-        set :views, 'app/views/'
-        enable :sessions 
-        set :session_secret, "secret_session"
-      end
 
+      # Read
       get '/characters' do 
         @characters = current_user.characters
         erb :'characters/all'
       end
 
+      get '/characters/:id/details' do 
+        @character = Character.where("id = ?", params[:id])
+        erb :'characters/details'
+      end
+
+      # Create
       get '/characters/new' do 
         erb :'characters/new'
       end
 
-      # Create
+      
       post '/characters/new' do 
 
         @character = Character.create(
@@ -39,15 +40,7 @@ class CharacterController < ApplicationController
           redirect '/characters/new'
         end
       end
-
-      # Read 
-
       
-
-      get '/characters/:id/details' do 
-        @character = Character.where("id = ?", params[:id])
-        erb :'characters/details'
-      end
 
 
       # Update
@@ -61,9 +54,7 @@ class CharacterController < ApplicationController
         redirect :"/characters/#{params[:id]}/edit"
       end
 
-      patch '/characters/:id' do 
-        # add logic to make sure that the character belongs to the current user
-        
+      patch '/characters/:id' do         
         @character = Character.find(params[:id])
         if @character.user == current_user
           @character.update(
@@ -85,18 +76,11 @@ class CharacterController < ApplicationController
       # Delete
 
       delete '/characters/:id' do 
-        # add logic to make sure that the character belongs to the current user
-
         @character = Character.find_by(:id => params[:id])
         if is_auth?(@character)
           @character.delete
           redirect :"/users/#{session[:user][:id]}"
         end
       end
-
-      # Add A read, make it so you can view all the characters
-      # and see all the details for a single character related to the user
-
-      # limit crud functionality for each user 
 
 end
