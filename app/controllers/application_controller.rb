@@ -65,7 +65,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user 
-      @current_user ||= User.find_by_id(session[:user][:id]) if ssession[:user][:id]
+      @current_user ||= User.find_by_id(session[:user][:id]) if session[:user][:id]
+    end
+
+    def is_auth?(character)
+      character.user == current_user
     end
   end
 

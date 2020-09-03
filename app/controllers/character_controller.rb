@@ -1,6 +1,6 @@
 require './config/environment'
 
-class CharacterController < Sinatra::Base 
+class CharacterController < ApplicationController 
 
     configure do
         set :public_folder, 'public'
@@ -9,7 +9,10 @@ class CharacterController < Sinatra::Base
         set :session_secret, "secret_session"
       end
 
-     
+      get '/characters' do 
+        @characters = current_user.characters
+        erb :'characters/all'
+      end
 
       get '/characters/new' do 
         erb :'characters/new'
@@ -39,11 +42,7 @@ class CharacterController < Sinatra::Base
 
       # Read 
 
-      get '/characters/:id/all' do 
-        @characters = Character.where("user_id = ?", params[:id])
-        
-        erb :'characters/all'
-      end
+      
 
       get '/characters/:id/details' do 
         @character = Character.where("id = ?", params[:id])
@@ -66,7 +65,7 @@ class CharacterController < Sinatra::Base
         # add logic to make sure that the character belongs to the current user
         
         @character = Character.find(params[:id])
-        if @character.user_id == session[:user][:id]
+        if @character.user == current_user
           @character.update(
             :name => params[:name],
             :character_class => params[:class],
@@ -87,8 +86,9 @@ class CharacterController < Sinatra::Base
 
       delete '/characters/:id' do 
         # add logic to make sure that the character belongs to the current user
+
         @character = Character.find_by(:id => params[:id])
-        if @character.user_id == session[:user][:id]
+        if is_auth?(@character)
           @character.delete
           redirect :"/users/#{session[:user][:id]}"
         end
